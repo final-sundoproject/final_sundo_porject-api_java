@@ -29,4 +29,17 @@ public class EvaluationController {
         evaluationService.deleteById(id);
         return ResponseEntity.ok().body("Evaluation deleted!");
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> modify(
+            @RequestBody EvaluationSaveDto dto,
+            @PathVariable Long id
+    ) {
+        log.info("modify evaluation: {}" , dto );
+        log.info("modify evaluation id : {}" , id );
+
+        evaluationService.modify(dto, id);
+
+        return ResponseEntity.ok().body("evaluation modified!");
+    }
 }

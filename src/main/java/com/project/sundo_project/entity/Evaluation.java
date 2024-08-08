@@ -1,5 +1,6 @@
 package com.project.sundo_project.entity;
 
+import com.project.sundo_project.dto.request.EvaluationSaveDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -55,4 +56,16 @@ public class Evaluation {
 
     @Column(name = "AverageRating")
     private int averageRating;
+
+    public void modifyEvaluation(EvaluationSaveDto dto) {
+        this.title = dto.getTitle();
+        this.arImage = dto.getArImage();
+        this.priRegistrationDate = LocalDateTime.now();
+        this.windVolume = dto.getWindVolume();
+        this.noiseLevel = dto.getNoiseLevel();
+        this.scenery = dto.getScenery();
+        this.waterDepth = dto.getWaterDepth();
+        this.averageRating = (dto.getWindVolume() + dto.getNoiseLevel()
+                + dto.getScenery() + dto.getWaterDepth()) / 4;
+    }
 }

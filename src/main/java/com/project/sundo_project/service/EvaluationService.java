@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.time.LocalDateTime;
 
@@ -36,5 +35,13 @@ public class EvaluationService {
 
     public void deleteById(Long id){
         evaluationRepository.deleteById(id);
+    }
+
+    public void modify(EvaluationSaveDto dto, Long id){
+        Evaluation foundEvaluation = evaluationRepository.findById(id).orElseThrow();
+        foundEvaluation.modifyEvaluation(dto);
+
+        evaluationRepository.save(foundEvaluation);
+
     }
 }
