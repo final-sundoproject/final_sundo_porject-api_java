@@ -22,4 +22,11 @@ public class EvaluationController {
         evaluationService.save(dto);
         return ResponseEntity.ok("Evaluation saved!");
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        log.info("Deleting Evaluation with ID: {}", id);
+        evaluationService.deleteById(id);
+        return ResponseEntity.ok().body("Evaluation deleted!");
+    }
 }
