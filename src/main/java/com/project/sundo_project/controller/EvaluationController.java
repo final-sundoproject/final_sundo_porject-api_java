@@ -1,6 +1,7 @@
 package com.project.sundo_project.controller;
 
 import com.project.sundo_project.dto.request.EvaluationSaveDto;
+import com.project.sundo_project.dto.response.EvaluationFind;
 import com.project.sundo_project.service.EvaluationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,5 +42,13 @@ public class EvaluationController {
         evaluationService.modify(dto, id);
 
         return ResponseEntity.ok().body("evaluation modified!");
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getEvaluation(@PathVariable Long id){
+        EvaluationFind foundOne = evaluationService.findById(id);
+        log.info("foundOne: {}", foundOne);
+
+        return ResponseEntity.ok().body(foundOne);
     }
 }

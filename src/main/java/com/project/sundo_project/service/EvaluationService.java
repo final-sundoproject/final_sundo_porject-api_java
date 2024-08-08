@@ -1,6 +1,7 @@
 package com.project.sundo_project.service;
 
 import com.project.sundo_project.dto.request.EvaluationSaveDto;
+import com.project.sundo_project.dto.response.EvaluationFind;
 import com.project.sundo_project.entity.Evaluation;
 import com.project.sundo_project.repository.EvaluationRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,4 +45,17 @@ public class EvaluationService {
         evaluationRepository.save(foundEvaluation);
 
     }
+
+    public void findAll(){
+
+    }
+
+    public EvaluationFind findById(Long id){
+        Evaluation foundId = evaluationRepository.findById(id).orElseThrow();
+        log.info("foundID : {} ",foundId);
+
+        return new EvaluationFind(foundId);
+
+    }
+
 }
