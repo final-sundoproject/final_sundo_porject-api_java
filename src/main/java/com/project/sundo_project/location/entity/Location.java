@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Dms {
+public class Location {
 
     @Id
     @Column(name = "locationId")

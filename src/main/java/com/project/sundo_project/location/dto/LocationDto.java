@@ -1,6 +1,6 @@
 package com.project.sundo_project.location.dto;
 
-import com.project.sundo_project.location.entity.Dms;
+import com.project.sundo_project.location.entity.Location;
 import lombok.*;
 
 @Getter
@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DmsDto {
+public class LocationDto {
 
     private double latitudeDegrees;
     private double latitudeMinutes;
@@ -20,8 +20,8 @@ public class DmsDto {
     private double longitudeSeconds;
     private String longitudeDirection;
 
-    public Dms toEntity(){
-        return Dms.builder()
+    public Location toEntity(){
+        return Location.builder()
                 .latitudeDegrees(this.latitudeDegrees)
                 .latitudeMinutes(this.latitudeMinutes)
                 .latitudeSeconds(this.latitudeSeconds)
