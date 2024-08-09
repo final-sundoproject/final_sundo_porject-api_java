@@ -1,4 +1,4 @@
-package com.project.sundo_project.location.config;
+package com.project.sundo_project.kbm.config;
 
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

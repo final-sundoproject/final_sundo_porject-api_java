@@ -1,4 +1,4 @@
-package com.project.sundo_project.config;
+package com.project.sundo_project.kbm.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
