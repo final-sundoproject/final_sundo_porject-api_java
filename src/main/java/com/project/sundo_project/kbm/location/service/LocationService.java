@@ -1,8 +1,8 @@
-package com.project.sundo_project.location.service;
+package com.project.sundo_project.kbm.location.service;
 
-import com.project.sundo_project.location.dto.LocationDto;
-import com.project.sundo_project.location.entity.Location;
-import com.project.sundo_project.location.repository.LocationRepository;
+import com.project.sundo_project.kbm.location.dto.LocationDto;
+import com.project.sundo_project.kbm.location.entity.Location;
+import com.project.sundo_project.kbm.location.repository.LocationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,4 +28,6 @@ public class LocationService {
 
         log.info("saveDms : {}", saveDms );
     }
+
+
 }

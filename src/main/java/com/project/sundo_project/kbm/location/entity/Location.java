@@ -1,10 +1,6 @@
-package com.project.sundo_project.location.entity;
+package com.project.sundo_project.kbm.location.entity;
 
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Builder
 public class Location {
 
@@ -28,7 +25,7 @@ public class Location {
     @Column(name = "RegistrantName")
     private String registrantName;
 
-    @Column(name = "RegistrationDate", nullable = false)
+    @Column(name = "RegistrationDate")
     private LocalDateTime registrationDate;
 
     @Column(name = "Latitude", precision = 9, scale = 6)

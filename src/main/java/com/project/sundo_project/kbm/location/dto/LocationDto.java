@@ -1,6 +1,6 @@
-package com.project.sundo_project.location.dto;
+package com.project.sundo_project.kbm.location.dto;
 
-import com.project.sundo_project.location.entity.Location;
+import com.project.sundo_project.kbm.location.entity.Location;
 import lombok.*;
 
 @Getter
