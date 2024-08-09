@@ -59,7 +59,6 @@ public class Evaluation {
 
     public void modifyEvaluation(EvaluationSaveDto dto) {
         this.title = dto.getTitle();
-        this.arImage = dto.getArImage();
         this.priRegistrationDate = LocalDateTime.now();
         this.windVolume = dto.getWindVolume();
         this.noiseLevel = dto.getNoiseLevel();

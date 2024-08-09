@@ -14,7 +14,6 @@ public class EvaluationSaveDto {
 
     private String title;
     private String registrantName;
-    private String arImage;
     private int windVolume;
     private int noiseLevel;
     private int scenery;
@@ -24,7 +23,6 @@ public class EvaluationSaveDto {
         return Evaluation.builder()
                 .title(this.title)
                 .registrantName(this.registrantName)
-                .arImage(this.arImage)
                 .windVolume(this.windVolume)
                 .noiseLevel(this.noiseLevel)
                 .scenery(this.scenery)

@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -21,9 +23,15 @@ public class EvaluationController {
     private final EvaluationService evaluationService;
 
     @PostMapping
-    public ResponseEntity<String> register(@RequestBody EvaluationSaveDto dto) {
-        log.info("Received DTO: {}", dto);
-        evaluationService.save(dto);
+    public ResponseEntity<String> register(
+            @RequestPart(value = "arImage") MultipartFile uploadFile,
+            @RequestPart(value = "evaluationInfo") EvaluationSaveDto dto) throws IOException {
+
+        log.info("uploadFile: {}", uploadFile);
+        log.info("dto: {}", dto);
+
+        evaluationService.save(uploadFile,dto);
+
         return ResponseEntity.ok("Evaluation saved!");
     }
 

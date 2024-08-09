@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,16 +23,20 @@ import java.util.stream.Collectors;
 public class EvaluationService {
 
     private final EvaluationRepository evaluationRepository;
+    private final FileUploadService fileUploadService;
 
-    public void save(EvaluationSaveDto dto){
+    public void save(MultipartFile uploadFile, EvaluationSaveDto dto) throws IOException {
 
         Evaluation evaluation = dto.toEntity();
+
+        String arImg = fileUploadService.uploadProfileImage(uploadFile);
 
         int avg = (evaluation.getWindVolume() + evaluation.getNoiseLevel()
                 + evaluation.getScenery() + evaluation.getWaterDepth()) / 4;
 
         evaluation.setAverageRating(avg);
         evaluation.setPriRegistrationDate(LocalDateTime.now());
+        evaluation.setArImage(arImg);
 
         log.info("evaluation + avg :{} " , evaluation);
 
