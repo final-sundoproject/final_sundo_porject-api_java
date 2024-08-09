@@ -1,7 +1,8 @@
 package com.project.sundo_project.service;
 
 import com.project.sundo_project.dto.request.EvaluationSaveDto;
-import com.project.sundo_project.dto.response.EvaluationFind;
+import com.project.sundo_project.dto.response.EvaluationFindAllDto;
+import com.project.sundo_project.dto.response.EvaluationFindDto;
 import com.project.sundo_project.entity.Evaluation;
 import com.project.sundo_project.repository.EvaluationRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -46,15 +49,30 @@ public class EvaluationService {
 
     }
 
-    public void findAll(){
+    public List<EvaluationFindAllDto> evaluationFindAll() {
+        List<Evaluation> foundAll = evaluationRepository.findAll();
+        log.info("service repo foundAll : {}", foundAll);
 
+        return  foundAll.stream().map(
+                evaluation -> new EvaluationFindAllDto(
+                        evaluation.getTitle(),
+                        evaluation.getRegistrantName(),
+                        evaluation.getPriRegistrationDate(),
+                        evaluation.getArImage(),
+                        evaluation.getWindVolume(),
+                        evaluation.getNoiseLevel(),
+                        evaluation.getWaterDepth(),
+                        evaluation.getScenery(),
+                        evaluation.getAverageRating()
+                )
+        ).collect(Collectors.toList());
     }
 
-    public EvaluationFind findById(Long id){
+    public EvaluationFindDto findById(Long id){
         Evaluation foundId = evaluationRepository.findById(id).orElseThrow();
         log.info("foundID : {} ",foundId);
 
-        return new EvaluationFind(foundId);
+        return new EvaluationFindDto(foundId);
 
     }
 

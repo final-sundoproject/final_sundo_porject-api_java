@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class EvaluationFind {
+public class EvaluationFindDto {
 
     private String title;
     private String registrantName;
@@ -20,7 +20,7 @@ public class EvaluationFind {
     private int waterDepth;
     private int avg;
 
-    public EvaluationFind(Evaluation foundId) {
+    public EvaluationFindDto(Evaluation foundId) {
         this.title = foundId.getTitle();
         this.registrantName = foundId.getRegistrantName();
         this.arImage = foundId.getArImage();

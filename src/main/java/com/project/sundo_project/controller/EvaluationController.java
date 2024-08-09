@@ -1,12 +1,15 @@
 package com.project.sundo_project.controller;
 
 import com.project.sundo_project.dto.request.EvaluationSaveDto;
-import com.project.sundo_project.dto.response.EvaluationFind;
+import com.project.sundo_project.dto.response.EvaluationFindAllDto;
+import com.project.sundo_project.dto.response.EvaluationFindDto;
 import com.project.sundo_project.service.EvaluationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -46,9 +49,17 @@ public class EvaluationController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getEvaluation(@PathVariable Long id){
-        EvaluationFind foundOne = evaluationService.findById(id);
+        EvaluationFindDto foundOne = evaluationService.findById(id);
         log.info("foundOne: {}", foundOne);
 
         return ResponseEntity.ok().body(foundOne);
+    }
+
+    @GetMapping("/foundAll")
+    public ResponseEntity<?> findAll() {
+        List<EvaluationFindAllDto> findAllList = evaluationService.evaluationFindAll();
+        log.info("findAll : {} ", findAllList);
+
+        return ResponseEntity.ok().body(findAllList);
     }
 }
