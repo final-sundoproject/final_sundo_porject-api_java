@@ -2,16 +2,17 @@ package com.project.sundo_project.location.controller;
 
 import com.project.sundo_project.location.dto.LocationDto;
 import com.project.sundo_project.location.service.LocationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/location")
+@RequiredArgsConstructor
 public class LocationController {
 
-    @Autowired
-    private LocationService locationService;
+    private final LocationService locationService;
 
     // DMS(도분초) 좌표값 저장
     @PostMapping
