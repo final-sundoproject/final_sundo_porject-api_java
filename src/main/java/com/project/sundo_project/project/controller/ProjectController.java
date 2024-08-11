@@ -7,9 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -28,37 +30,58 @@ public class ProjectController {
     public ResponseEntity<List<ProjectFindAllDto>> getProjectsByCompanyCode(@RequestParam int companyCode) {
         List<ProjectFindAllDto> projects = projectService.findAllProjectsByCompanyCode(companyCode);
         if (projects.isEmpty()) {
-            return ResponseEntity.noContent().build(); // 내용이 없을 경우 No Content 상태 반환
+            log.info("No projects found for companyCode: {}", companyCode);
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(projects);
     }
 
-//    // 프로젝트 ID로 단일 프로젝트 조회
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Project> getProjectById(@PathVariable int id) {
-//        Project project = projectService.findProjectById(id);
-//        return project != null ? ResponseEntity.ok(project) : ResponseEntity.notFound().build();
-//    }
-//
+    // 프로젝트 ID로 단일 프로젝트 조회
+    @GetMapping("/{id}")
+    public ResponseEntity<Project> getProjectById(@PathVariable int id) {
+        Optional<Project> project = Optional.ofNullable(projectService.findProjectById(id));
+        return project.map(ResponseEntity::ok)
+                .orElseGet(() -> {
+                    log.warn("Project with id {} not found", id);
+                    return ResponseEntity.notFound().build();
+                });
+    }
+
     // 새 프로젝트 생성
     @PostMapping
     public ResponseEntity<Project> createProject(@RequestBody Project project) {
         Project savedProject = projectService.saveProject(project);
-        log.info("project:{}", project);
-        return ResponseEntity.created(URI.create("/api/projects/" + savedProject.getProjectId())).body(savedProject);
+        log.info("Created project: {}", savedProject);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedProject.getProjectId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(savedProject);
     }
 
-//    // 프로젝트 업데이트
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Project> updateProject(@PathVariable int id, @RequestBody Project project) {
-//        Project updatedProject = projectService.updateProject(id, project);
-//        return updatedProject != null ? ResponseEntity.ok(updatedProject) : ResponseEntity.notFound().build();
-//    }
-//
+    // 프로젝트 업데이트
+    @PutMapping("/{id}")
+    public ResponseEntity<Project> updateProject(@PathVariable int id, @RequestBody Project project) {
+        Optional<Project> updatedProject = Optional.ofNullable(projectService.updateProject(id, project));
+        return updatedProject.map(ResponseEntity::ok)
+                .orElseGet(() -> {
+                    log.warn("Failed to update project with id {}. Project not found.", id);
+                    return ResponseEntity.notFound().build();
+                });
+    }
+
     // 프로젝트 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable int id) {
         boolean isDeleted = projectService.deleteProject(id);
-        return isDeleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        if (isDeleted) {
+            log.info("Deleted project with id: {}", id);
+            return ResponseEntity.ok().build();
+        } else {
+            log.warn("Failed to delete project with id {}. Project not found.", id);
+            return ResponseEntity.notFound().build();
+        }
     }
 }

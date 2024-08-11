@@ -28,18 +28,35 @@ public class ProjectService {
 
     public Project saveProject(Project project) {
         project.setRegistrationDate(LocalDateTime.now());
-        Project save = projectRepository.save(project);
-        return save;
+        Project savedProject = projectRepository.save(project);
+        log.info("Project saved: {}", savedProject);
+        return savedProject;
     }
 
-
     public boolean deleteProject(int id) {
-        Optional<Project> project = projectRepository.findById(id);
-        if (project.isPresent()) {
-            projectRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
+        return projectRepository.findById(id)
+                .map(project -> {
+                    projectRepository.deleteById(id);
+                    log.info("Project deleted: {}", project);
+                    return true;
+                })
+                .orElse(false);
+    }
+
+    public Project findProjectById(int id) {
+        return projectRepository.findById(id).orElse(null);
+    }
+
+    public Project updateProject(int id, Project projectDetails) {
+        return projectRepository.findById(id)
+                .map(project -> {
+                    project.setProjectName(projectDetails.getProjectName());
+                    project.setCompanyCode(projectDetails.getCompanyCode());
+                    project.setRegistrationDate(LocalDateTime.now());  // 업데이트할 때 날짜 갱신
+                    Project updatedProject = projectRepository.save(project);
+                    log.info("Project updated: {}", updatedProject);
+                    return updatedProject;
+                })
+                .orElse(null);
     }
 }
