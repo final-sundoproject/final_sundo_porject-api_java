@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
-
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -20,14 +19,13 @@ public class LocationService {
     private final LocationRepository locationRepository;
 
     // DMS(도분초) 좌표값 저장
-    public void saveDmsLocation(LocationDto locationDto) {
-        Location saveDms = locationDto.toEntity();
+    public Location saveDmsLocation(LocationDto locationDto) {
+        Location saveDms = locationDto.toEntity(); // LocationDto를 Entity로 변환
 
         saveDms.setRegistrationDate(LocalDateTime.now());
-        locationRepository.save(saveDms);
+        Location savedLocation = locationRepository.save(saveDms); // 저장된 Location 객체를 반환
 
-        log.info("saveDms : {}", saveDms );
+        log.info("saveDms : {}", savedLocation);
+        return savedLocation; // 저장된 Location 객체를 반환
     }
-
-
 }
