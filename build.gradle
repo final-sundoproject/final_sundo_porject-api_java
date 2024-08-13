@@ -60,11 +60,13 @@ dependencies {
 	// JUNIT
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	implementation 'org.springframework.security:spring-security-crypto'
+
 }
 
 // 테스트 설정
 tasks.named('test') {
-    useJUnitPlatform()
+	useJUnitPlatform()
 	exclude '**/*'  // 빌드 시 테스트 생략
 }
 
