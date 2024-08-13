@@ -1,7 +1,7 @@
-package com.project.sundo_project.location.generator.controller;
+package com.project.sundo_project.location.controller;
 
-import com.project.sundo_project.location.generator.dto.GeneratorDto;
-import com.project.sundo_project.location.generator.service.GeneratorService;
+import com.project.sundo_project.location.dto.GeneratorDto;
+import com.project.sundo_project.location.service.GeneratorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

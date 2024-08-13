@@ -1,6 +1,6 @@
-package com.project.sundo_project.location.location.dto;
+package com.project.sundo_project.location.dto;
 
-import com.project.sundo_project.location.location.entity.Location;
+import com.project.sundo_project.location.entity.Location;
 import lombok.*;
 
 @Getter
@@ -20,6 +20,9 @@ public class LocationDto {
     private double longitudeSeconds;
     private String longitudeDirection;
 
+    private double latitude;
+    private double longitude;
+
     public Location toEntity(){
         return Location.builder()
                 .latitudeDegrees(this.latitudeDegrees)
@@ -30,6 +33,8 @@ public class LocationDto {
                 .longitudeMinutes(this.longitudeMinutes)
                 .longitudeSeconds(this.longitudeSeconds)
                 .longitudeDirection(this.longitudeDirection)
+                .latitude(this.latitude)
+                .longitude(this.longitude)
                 .build();
     }
 }

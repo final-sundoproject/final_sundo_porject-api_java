@@ -1,4 +1,4 @@
-package com.project.sundo_project.location.generator.entity.Value;
+package com.project.sundo_project.location.entity.Value;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

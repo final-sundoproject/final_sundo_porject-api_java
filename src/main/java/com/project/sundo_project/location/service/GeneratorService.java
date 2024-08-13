@@ -1,11 +1,11 @@
-package com.project.sundo_project.location.generator.service;
+package com.project.sundo_project.location.service;
 
 
-import com.project.sundo_project.location.generator.dto.GeneratorDto;
-import com.project.sundo_project.location.generator.entity.Generator;
-import com.project.sundo_project.location.generator.repository.GeneratorRepository;
-import com.project.sundo_project.location.location.entity.Location;
-import com.project.sundo_project.location.location.repository.LocationRepository;
+import com.project.sundo_project.location.dto.GeneratorDto;
+import com.project.sundo_project.location.entity.Generator;
+import com.project.sundo_project.location.entity.Location;
+import com.project.sundo_project.location.repository.GeneratorRepository;
+import com.project.sundo_project.location.repository.LocationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

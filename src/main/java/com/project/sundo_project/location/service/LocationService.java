@@ -1,8 +1,8 @@
-package com.project.sundo_project.location.location.service;
+package com.project.sundo_project.location.service;
 
-import com.project.sundo_project.location.location.dto.LocationDto;
-import com.project.sundo_project.location.location.entity.Location;
-import com.project.sundo_project.location.location.repository.LocationRepository;
+import com.project.sundo_project.location.dto.LocationDto;
+import com.project.sundo_project.location.entity.Location;
+import com.project.sundo_project.location.repository.LocationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class LocationService {
 
     private final LocationRepository locationRepository;
 
-    // DMS(도분초) 좌표값 저장
+    // 좌표값 저장
     public Location saveDmsLocation(LocationDto locationDto) {
         Location saveDms = locationDto.toEntity(); // LocationDto를 Entity로 변환
 
