@@ -1,4 +1,4 @@
-package com.project.sundo_project.company.config;
+package com.project.sundo_project.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
