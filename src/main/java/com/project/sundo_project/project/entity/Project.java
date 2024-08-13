@@ -3,7 +3,6 @@ package com.project.sundo_project.project.entity;
 import lombok.*;
 
 import javax.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,13 +17,13 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int projectId;
+    private Long projectId; // Long 타입으로 변경
 
     @Column
     private String projectName;
 
     @Column
-    private int companyCode;
+    private Long companyCode; // Long 타입으로 변경
 
     @Column
     private LocalDateTime registrationDate;

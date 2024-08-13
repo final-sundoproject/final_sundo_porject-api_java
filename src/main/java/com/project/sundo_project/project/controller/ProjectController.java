@@ -27,7 +27,7 @@ public class ProjectController {
 
     // 모든 프로젝트 조회 (특정 회사 코드에 따라)
     @GetMapping
-    public ResponseEntity<List<ProjectFindAllDto>> getProjectsByCompanyCode(@RequestParam int companyCode) {
+    public ResponseEntity<List<ProjectFindAllDto>> getProjectsByCompanyCode(@RequestParam Long companyCode) {  // int에서 Long으로 변경
         List<ProjectFindAllDto> projects = projectService.findAllProjectsByCompanyCode(companyCode);
         if (projects.isEmpty()) {
             log.info("No projects found for companyCode: {}", companyCode);
@@ -38,7 +38,7 @@ public class ProjectController {
 
     // 프로젝트 ID로 단일 프로젝트 조회
     @GetMapping("/{id}")
-    public ResponseEntity<Project> getProjectById(@PathVariable int id) {
+    public ResponseEntity<Project> getProjectById(@PathVariable Long id) {  // int에서 Long으로 변경
         Optional<Project> project = Optional.ofNullable(projectService.findProjectById(id));
         return project.map(ResponseEntity::ok)
                 .orElseGet(() -> {
@@ -63,7 +63,7 @@ public class ProjectController {
 
     // 프로젝트 업데이트
     @PutMapping("/{id}")
-    public ResponseEntity<Project> updateProject(@PathVariable int id, @RequestBody Project project) {
+    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project project) {  // int에서 Long으로 변경
         Optional<Project> updatedProject = Optional.ofNullable(projectService.updateProject(id, project));
         return updatedProject.map(ResponseEntity::ok)
                 .orElseGet(() -> {
@@ -74,7 +74,7 @@ public class ProjectController {
 
     // 프로젝트 삭제
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProject(@PathVariable int id) {
+    public ResponseEntity<Void> deleteProject(@PathVariable Long id) {  // int에서 Long으로 변경
         boolean isDeleted = projectService.deleteProject(id);
         if (isDeleted) {
             log.info("Deleted project with id: {}", id);
