@@ -1,6 +1,9 @@
 package com.project.sundo_project.evaluation.entity;
 
 import com.project.sundo_project.evaluation.dto.request.EvaluationSaveDto;
+import com.project.sundo_project.project.entity.Project;
+import com.project.sundo_project.location.generator.entity.Generator;
+import com.project.sundo_project.location.location.entity.Location;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,9 +24,6 @@ public class Evaluation {
     @Column(name = "EvaluationID")
     private Long evaluationID;
 
-    @Column(name = "ProjectId")
-    private int projectID;
-
     @Column(name = "Title")
     private String title;
 
@@ -36,11 +36,17 @@ public class Evaluation {
     @Column(name = "ArImage")
     private String arImage;
 
-    @Column(name = "GeneratorId")
-    private int generatorID;
+    @ManyToOne
+    @JoinColumn(name = "ProjectId")
+    private Project project;
 
-    @Column(name = "LocationId")
-    private int locationID;
+    @OneToOne
+    @JoinColumn(name = "GeneratorId")
+    private Generator generator;
+
+    @OneToOne
+    @JoinColumn(name = "LocationId")
+    private Location location;
 
     @Column(name = "WindVolume")
     private int windVolume;

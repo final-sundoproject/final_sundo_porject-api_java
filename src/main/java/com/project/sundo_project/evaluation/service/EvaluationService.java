@@ -69,7 +69,8 @@ public class EvaluationService {
                         evaluation.getNoiseLevel(),
                         evaluation.getWaterDepth(),
                         evaluation.getScenery(),
-                        evaluation.getAverageRating()
+                        evaluation.getAverageRating(),
+                        evaluation.getEvaluationID()
                 )
         ).collect(Collectors.toList());
     }

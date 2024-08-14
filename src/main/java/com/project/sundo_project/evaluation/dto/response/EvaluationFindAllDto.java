@@ -23,5 +23,6 @@ public class EvaluationFindAllDto {
     private int waterDepth;
     private int scenery;
     private int averageRating;
+    private Long evaluationId;
 
 }
