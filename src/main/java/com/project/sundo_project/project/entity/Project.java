@@ -18,13 +18,13 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int projectId;
+    private Long projectId;
 
     @Column
     private String projectName;
 
     @Column
-    private int companyCode;
+    private Long companyCode;
 
     @Column
     private LocalDateTime registrationDate;

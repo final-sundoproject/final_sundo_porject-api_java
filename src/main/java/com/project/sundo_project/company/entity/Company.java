@@ -18,7 +18,7 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT 설정
     @Column(name = "company_code")
-    private int companyCode;
+    private Long companyCode;
 
     @Column(name = "company_email", nullable = false, unique = true)
     private String companyEmail;
