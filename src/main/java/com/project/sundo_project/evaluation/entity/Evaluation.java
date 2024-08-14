@@ -2,8 +2,8 @@ package com.project.sundo_project.evaluation.entity;
 
 import com.project.sundo_project.evaluation.dto.request.EvaluationSaveDto;
 import com.project.sundo_project.project.entity.Project;
-import com.project.sundo_project.location.generator.entity.Generator;
-import com.project.sundo_project.location.location.entity.Location;
+import com.project.sundo_project.location.entity.Generator;
+import com.project.sundo_project.location.entity.Location;
 import lombok.*;
 
 import javax.persistence.*;

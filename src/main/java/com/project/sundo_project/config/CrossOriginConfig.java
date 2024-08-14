@@ -7,7 +7,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CrossOriginConfig implements WebMvcConfigurer {
     private String[] urls = {
-            "http://localhost:8000"
+            "http://localhost:8000",
+            "http://localhost:8080"
     };
 
     @Override
@@ -18,6 +19,6 @@ public class CrossOriginConfig implements WebMvcConfigurer {
                 .allowedOrigins(urls)
                 .allowedMethods("*")
                 .allowedHeaders("*")
-                .allowCredentials(true);
+                .allowCredentials(false);
     }
 }
