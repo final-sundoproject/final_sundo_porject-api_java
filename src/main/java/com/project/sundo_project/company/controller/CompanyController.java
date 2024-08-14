@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -35,8 +35,15 @@ public class CompanyController {
         Optional<Company> company = companyService.loginCompany(email, password);
         if (company.isPresent()) {
             // JWT 생성
-            String token = jwtUtil.generateToken(email);
-            return ResponseEntity.ok(Collections.singletonMap("token", token));
+            Long companyCode = company.get().getCompanyCode(); // companyCode 가져오기
+            String token = jwtUtil.generateToken(email, companyCode);
+
+            // 토큰과 companyCode를 함께 응답
+            Map<String, Object> response = new HashMap<>();
+            response.put("token", token);
+            response.put("companyCode", companyCode);
+
+            return ResponseEntity.ok(response);
         }
         return ResponseEntity.status(401).body("Invalid credentials");
     }
@@ -49,5 +56,4 @@ public class CompanyController {
         }
         return ResponseEntity.status(404).body("Company not found");
     }
-
 }

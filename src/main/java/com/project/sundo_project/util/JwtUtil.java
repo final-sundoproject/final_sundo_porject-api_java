@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Map;
 
 @Component
 public class JwtUtil {
@@ -21,10 +22,11 @@ public class JwtUtil {
         this.expirationTime = expirationTime;
     }
 
-    // JWT 토큰 생성
-    public String generateToken(String email) {
+    // JWT 토큰 생성 - companyCode 포함
+    public String generateToken(String email, Long companyCode) {
         return Jwts.builder()
                 .setSubject(email)
+                .claim("companyCode", companyCode)  // companyCode 추가
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(secretKey)
@@ -45,5 +47,11 @@ public class JwtUtil {
     public String getEmailFromToken(String token) {
         Claims claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
         return claims.getSubject();
+    }
+
+    // 토큰에서 companyCode 추출
+    public Long getCompanyCodeFromToken(String token) {
+        Claims claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
+        return claims.get("companyCode", Long.class);
     }
 }
