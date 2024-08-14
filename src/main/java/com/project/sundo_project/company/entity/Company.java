@@ -20,6 +20,7 @@ public class Company {
     @Column(name = "company_code")
     private Long companyCode;  // 타입을 Long으로 변경
 
+
     @Column(name = "company_email", nullable = false, unique = true)
     private String companyEmail;
 
