@@ -22,10 +22,17 @@ public class EvaluationController {
 
     private final EvaluationService evaluationService;
 
-    @PostMapping
+    @PostMapping(consumes = "multipart/form-data")
     public ResponseEntity<String> register(
             @RequestPart(value = "arImage") MultipartFile uploadFile,
-            @RequestPart(value = "evaluationInfo") EvaluationSaveDto dto) throws IOException {
+            @RequestPart(value = "title") String title,
+            @RequestPart(value = "registrantName") String registrantName,
+            @RequestPart(value = "windVolume") int windVolume,
+            @RequestPart(value = "noiseLevel") int noiseLevel,
+            @RequestPart(value = "scenery") int scenery,
+            @RequestPart(value = "waterDepth") int waterDepth) throws IOException {
+
+        EvaluationSaveDto dto = new EvaluationSaveDto(title, registrantName, windVolume, noiseLevel, scenery, waterDepth);
 
         log.info("uploadFile: {}", uploadFile);
         log.info("dto: {}", dto);

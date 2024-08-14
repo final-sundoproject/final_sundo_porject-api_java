@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -22,7 +21,7 @@ public class ProjectService {
         this.projectRepository = projectRepository;
     }
 
-    public List<ProjectFindAllDto> findAllProjectsByCompanyCode(int companyCode) {
+    public List<ProjectFindAllDto> findAllProjectsByCompanyCode(Long companyCode) {  // int에서 Long으로 변경
         return projectRepository.findAllByCompanyCode(companyCode);
     }
 
@@ -33,7 +32,7 @@ public class ProjectService {
         return savedProject;
     }
 
-    public boolean deleteProject(int id) {
+    public boolean deleteProject(Long id) {  // int에서 Long으로 변경
         return projectRepository.findById(id)
                 .map(project -> {
                     projectRepository.deleteById(id);
@@ -43,11 +42,11 @@ public class ProjectService {
                 .orElse(false);
     }
 
-    public Project findProjectById(int id) {
+    public Project findProjectById(Long id) {  // int에서 Long으로 변경
         return projectRepository.findById(id).orElse(null);
     }
 
-    public Project updateProject(int id, Project projectDetails) {
+    public Project updateProject(Long id, Project projectDetails) {  // int에서 Long으로 변경
         return projectRepository.findById(id)
                 .map(project -> {
                     project.setProjectName(projectDetails.getProjectName());
