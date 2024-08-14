@@ -14,4 +14,6 @@ public class ProjectFindAllDto {
 
     private String projectName;
     private LocalDateTime registrationDate;
+    private Long companyCode;  // int에서 Long으로 변경
+    private Long projectId;     // int에서 Long으로 변경
 }

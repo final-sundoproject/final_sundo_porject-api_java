@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
 
-public interface ProjectRepository extends JpaRepository<Project, Integer> {
+public interface ProjectRepository extends JpaRepository<Project, Long> {  // Integer에서 Long으로 변경
 
-    @Query("SELECT new com.project.sundo_project.project.dto.ProjectFindAllDto(p.projectName, p.registrationDate) FROM Project p WHERE p.companyCode = :companyCode")
-    List<ProjectFindAllDto> findAllByCompanyCode(@Param("companyCode") int companyCode);
+    @Query("SELECT new com.project.sundo_project.project.dto.ProjectFindAllDto(p.projectName, p.registrationDate, p.companyCode, p.projectId) FROM Project p WHERE p.companyCode = :companyCode")
+    List<ProjectFindAllDto> findAllByCompanyCode(@Param("companyCode") Long companyCode);  // long에서 Long으로 변경
 }

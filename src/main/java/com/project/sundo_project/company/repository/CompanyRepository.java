@@ -7,9 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CompanyRepository extends JpaRepository<Company, Integer> {
+public interface CompanyRepository extends JpaRepository<Company, Long> {  // Integer에서 Long으로 변경
     Optional<Company> findByCompanyEmail(String email);
-    // 필요한 경우 추가적인 쿼리 메소드 정의 가능
 
     // 회사명으로 조회
     Optional<Company> findByCompanyName(String companyName);
