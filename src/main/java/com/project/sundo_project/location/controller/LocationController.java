@@ -18,10 +18,10 @@ public class LocationController {
     private final LocationService locationService;
 
     // 좌표값 저장
-    @PostMapping
-    public ResponseEntity<?> registerLocation(@RequestBody LocationDto locationDto) {
+    @PostMapping("/{projectId}")
+    public ResponseEntity<?> registerLocation(@RequestBody LocationDto locationDto,@PathVariable Long projectId) {
         // LocationDto를 사용하여 Location 엔티티를 생성하고 DB에 저장
-        Location savedLocaiton = locationService.saveDmsLocation(locationDto);
+        Location savedLocaiton = locationService.saveDmsLocation(locationDto,projectId);
 
         // 저장된 location의 ID를 반환
         Long locationID = savedLocaiton.getLocationID();
