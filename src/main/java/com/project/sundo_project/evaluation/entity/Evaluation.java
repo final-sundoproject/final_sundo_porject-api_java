@@ -37,15 +37,15 @@ public class Evaluation {
     private String arImage;
 
     @ManyToOne
-    @JoinColumn(name = "ProjectId", nullable = false)
+    @JoinColumn(name = "ProjectId")
     private Project project;
 
     @OneToOne
-    @JoinColumn(name = "GeneratorId", nullable = false)
+    @JoinColumn(name = "GeneratorId")
     private Generator generator;
 
     @OneToOne
-    @JoinColumn(name = "LocationId", nullable = false)
+    @JoinColumn(name = "LocationId")
     private Location location;
 
     @Column(name = "WindVolume")
