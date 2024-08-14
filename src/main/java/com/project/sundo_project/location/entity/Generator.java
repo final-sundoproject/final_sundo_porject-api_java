@@ -1,7 +1,6 @@
-package com.project.sundo_project.location.generator.entity;
+package com.project.sundo_project.location.entity;
 
 
-import com.project.sundo_project.location.location.entity.Location;
 import lombok.*;
 
 import javax.persistence.*;

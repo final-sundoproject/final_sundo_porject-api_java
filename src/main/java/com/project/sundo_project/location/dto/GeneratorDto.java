@@ -1,7 +1,7 @@
-package com.project.sundo_project.location.generator.dto;
+package com.project.sundo_project.location.dto;
 
-import com.project.sundo_project.location.generator.entity.Generator;
-import com.project.sundo_project.location.generator.entity.Value.GeneratorType;
+import com.project.sundo_project.location.entity.Generator;
+import com.project.sundo_project.location.entity.Value.GeneratorType;
 import lombok.*;
 
 @Getter

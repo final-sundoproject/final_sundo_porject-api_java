@@ -1,4 +1,4 @@
-package com.project.sundo_project.location.location.entity;
+package com.project.sundo_project.location.entity;
 
 import lombok.*;
 

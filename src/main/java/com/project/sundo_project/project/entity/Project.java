@@ -17,7 +17,8 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long projectId; // Long 타입으로 변경
+    private Long projectId;
+
 
     @Column
     private String projectName;
