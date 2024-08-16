@@ -78,7 +78,10 @@ public class CompanyController {
      * 비밀번호 재설정
      */
     @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestParam String companyEmail, @RequestParam String newPassword) {
+    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> request) {
+        String companyEmail = request.get("companyEmail");
+        String newPassword = request.get("newPassword");
+
         Optional<Company> company = companyService.findByEmail(companyEmail);
         boolean isUpdated = companyService.updatePassword(company, newPassword);
         if (isUpdated) {
