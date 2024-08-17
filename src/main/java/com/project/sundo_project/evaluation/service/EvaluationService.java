@@ -5,6 +5,7 @@ import com.project.sundo_project.evaluation.dto.response.EvaluationFindAllDto;
 import com.project.sundo_project.evaluation.dto.response.EvaluationFindDto;
 import com.project.sundo_project.evaluation.entity.Evaluation;
 import com.project.sundo_project.evaluation.repository.EvaluationRepository;
+import com.project.sundo_project.location.entity.Location;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,7 +27,7 @@ public class EvaluationService {
     private final EvaluationRepository evaluationRepository;
     private final FileUploadService fileUploadService;
 
-    public void save(MultipartFile uploadFile, EvaluationSaveDto dto) throws IOException {
+    public void save(MultipartFile uploadFile, EvaluationSaveDto dto, Location locationId) throws IOException {
 
         Evaluation evaluation = dto.toEntity();
 
@@ -37,6 +39,7 @@ public class EvaluationService {
         evaluation.setAverageRating(avg);
         evaluation.setPriRegistrationDate(LocalDateTime.now());
         evaluation.setArImage(arImg);
+        evaluation.setLocation(locationId);
 
         log.info("evaluation + avg :{} " , evaluation);
 

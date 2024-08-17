@@ -4,6 +4,8 @@ import com.project.sundo_project.evaluation.dto.request.EvaluationSaveDto;
 import com.project.sundo_project.evaluation.dto.response.EvaluationFindAllDto;
 import com.project.sundo_project.evaluation.dto.response.EvaluationFindDto;
 import com.project.sundo_project.evaluation.service.EvaluationService;
+import com.project.sundo_project.location.entity.Location;
+import com.project.sundo_project.location.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -21,6 +24,7 @@ import java.util.List;
 public class EvaluationController {
 
     private final EvaluationService evaluationService;
+    private final LocationService locationService;
 
     @PostMapping(consumes = "multipart/form-data")
     public ResponseEntity<String> register(
@@ -30,14 +34,18 @@ public class EvaluationController {
             @RequestPart(value = "windVolume") int windVolume,
             @RequestPart(value = "noiseLevel") int noiseLevel,
             @RequestPart(value = "scenery") int scenery,
-            @RequestPart(value = "waterDepth") int waterDepth) throws IOException {
+            @RequestPart(value = "waterDepth") int waterDepth,
+            @RequestPart(value = "locationId") String locationId) throws IOException {
 
         EvaluationSaveDto dto = new EvaluationSaveDto(title, registrantName, windVolume, noiseLevel, scenery, waterDepth);
 
         log.info("uploadFile: {}", uploadFile);
         log.info("dto: {}", dto);
 
-        evaluationService.save(uploadFile,dto);
+        Location findId = locationService.findById(locationId);
+
+
+        evaluationService.save(uploadFile,dto,findId);
 
         return ResponseEntity.ok("Evaluation saved!");
     }
