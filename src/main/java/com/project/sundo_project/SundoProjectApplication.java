@@ -11,7 +11,7 @@ public class SundoProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SundoProjectApplication.class, args);
 
-		System.out.println("test3");
+		System.out.println("test4");
 	}
 
 }
