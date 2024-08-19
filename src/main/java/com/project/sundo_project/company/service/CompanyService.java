@@ -3,13 +3,17 @@ package com.project.sundo_project.company.service;
 import com.project.sundo_project.company.entity.Company;
 import com.project.sundo_project.company.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 @Service
-public class CompanyService {
+public class CompanyService implements UserDetailsService {
 
     @Autowired
     private CompanyRepository companyRepository;
@@ -52,5 +56,26 @@ public class CompanyService {
     public Optional<String> findEmailByCompanyName(String companyName) {
         Optional<Company> companyOptional = companyRepository.findByCompanyName(companyName);
         return companyOptional.map(Company::getCompanyEmail);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        System.out.println("Attempting to load user with email: " + email); // 디버깅 로그
+
+        // 이메일로 사용자를 찾기
+        Optional<Company> companyOptional = companyRepository.findByCompanyEmail(email);
+
+        if (companyOptional.isEmpty()) {
+            System.out.println("Company not found with email: " + email); // 디버깅 로그
+            throw new UsernameNotFoundException("Company not found with email: " + email);
+        }
+
+        Company company = companyOptional.get();
+
+        return new org.springframework.security.core.userdetails.User(
+                company.getCompanyEmail(),
+                company.getPassword(),
+                new ArrayList<>() // 사용자의 권한 목록
+        );
     }
 }

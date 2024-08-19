@@ -1,6 +1,7 @@
 package com.project.sundo_project.evaluation.dto.request;
 
 import com.project.sundo_project.evaluation.entity.Evaluation;
+import com.project.sundo_project.location.entity.Location;
 import lombok.*;
 
 @Getter
@@ -18,6 +19,7 @@ public class EvaluationSaveDto {
     private int noiseLevel;
     private int scenery;
     private int waterDepth;
+
 
     public Evaluation toEntity() {
         return Evaluation.builder()

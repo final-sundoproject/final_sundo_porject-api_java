@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, Long> {  // Integer에서 Long으로 변경
-    Optional<Company> findByCompanyEmail(String email);
+    Optional<Company> findByCompanyEmail(String companyEmail);
 
     // 회사명으로 조회
     Optional<Company> findByCompanyName(String companyName);

@@ -2,7 +2,6 @@ package com.project.sundo_project.evaluation.entity;
 
 import com.project.sundo_project.evaluation.dto.request.EvaluationSaveDto;
 import com.project.sundo_project.project.entity.Project;
-import com.project.sundo_project.location.entity.Generator;
 import com.project.sundo_project.location.entity.Location;
 import lombok.*;
 
@@ -39,10 +38,6 @@ public class Evaluation {
     @ManyToOne
     @JoinColumn(name = "ProjectId")
     private Project project;
-
-    @OneToOne
-    @JoinColumn(name = "GeneratorId")
-    private Generator generator;
 
     @OneToOne
     @JoinColumn(name = "LocationId")

@@ -1,5 +1,6 @@
 package com.project.sundo_project.location.service;
 
+import com.project.sundo_project.exception.ResourceNotFoundException;
 import com.project.sundo_project.location.dto.LocationDto;
 import com.project.sundo_project.location.entity.Location;
 import com.project.sundo_project.location.repository.LocationRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,5 +32,11 @@ public class LocationService {
 
         log.info("saveDms : {}", savedLocation);
         return savedLocation; // 저장된 Location 객체를 반환
+    }
+
+    public Location findById(String id) {
+        Long locationId = Long.parseLong(id); // id가 Long 타입으로 변환 가능한 경우
+        return locationRepository.findById(locationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Location not found with id " + id));
     }
 }
