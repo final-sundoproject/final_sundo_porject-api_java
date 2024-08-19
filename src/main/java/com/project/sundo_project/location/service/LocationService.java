@@ -23,11 +23,12 @@ public class LocationService {
     private final ProjectService projectService;
 
     // 좌표값 저장
-    public Location saveDmsLocation(LocationDto locationDto,Long projectId) {
+    public Location saveDmsLocation(LocationDto locationDto,Long projectId ) {
         Location saveDms = locationDto.toEntity(); // LocationDto를 Entity로 변환
 
         saveDms.setRegistrationDate(LocalDateTime.now());
         saveDms.setProjectId(projectId);
+
         Location savedLocation = locationRepository.save(saveDms); // 저장된 Location 객체를 반환
 
         log.info("saveDms : {}", savedLocation);
