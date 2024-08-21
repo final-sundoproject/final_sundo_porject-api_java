@@ -2,6 +2,7 @@ package com.project.sundo_project.company.service;
 
 import com.project.sundo_project.company.entity.Company;
 import com.project.sundo_project.company.repository.CompanyRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Optional;
 @Service
+@Slf4j
 public class CompanyService implements UserDetailsService {
 
     @Autowired
@@ -32,6 +34,7 @@ public class CompanyService implements UserDetailsService {
 
             // 비밀번호 검증
             if (passwordEncoder.matches(rawPassword, company.get().getPassword())) {
+                log.info("company : {}", company);
                 return company; // 로그인 성공
             } else {
                 System.out.println("Password does not match.");

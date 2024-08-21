@@ -26,16 +26,16 @@ public class EvaluationController {
     private final EvaluationService evaluationService;
     private final LocationService locationService;
 
-    @PostMapping(consumes = "multipart/form-data")
-    public ResponseEntity<String> register(
-            @RequestPart(value = "arImage") MultipartFile uploadFile,
-            @RequestPart(value = "title") String title,
-            @RequestPart(value = "registrantName") String registrantName,
-            @RequestPart(value = "windVolume") int windVolume,
-            @RequestPart(value = "noiseLevel") int noiseLevel,
-            @RequestPart(value = "scenery") int scenery,
-            @RequestPart(value = "waterDepth") int waterDepth,
-            @RequestPart(value = "locationId") String locationId) throws IOException {
+    @PostMapping
+    public ResponseEntity<?> register(
+            @RequestParam("arImage") MultipartFile uploadFile,
+            @RequestParam("title") String title,
+            @RequestParam("registrantName") String registrantName,
+            @RequestParam("windVolume") int windVolume,
+            @RequestParam("noiseLevel") int noiseLevel,
+            @RequestParam("scenery") int scenery,
+            @RequestParam("waterDepth") int waterDepth,
+            @RequestParam("locationId") String locationId) throws IOException {
 
         EvaluationSaveDto dto = new EvaluationSaveDto(title, registrantName, windVolume, noiseLevel, scenery, waterDepth);
 

@@ -38,9 +38,11 @@ public class CompanyController {
             // JWT 생성
             Long companyCode = company.get().getCompanyCode(); // companyCode 가져오기
             String token = jwtUtil.generateToken(email, companyCode);
+            String companyName = company.get().getCompanyName();
 
             // 토큰과 companyCode를 함께 응답
             Map<String, Object> response = new HashMap<>();
+            response.put("companyName", companyName);
             response.put("token", token);
             response.put("companyCode", companyCode);
 
