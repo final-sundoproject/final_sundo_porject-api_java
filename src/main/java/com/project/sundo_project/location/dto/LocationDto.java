@@ -23,6 +23,8 @@ public class LocationDto {
     private double latitude;
     private double longitude;
 
+    private String registerName;
+
     public Location toEntity(){
         return Location.builder()
                 .latitudeDegrees(this.latitudeDegrees)
@@ -35,6 +37,7 @@ public class LocationDto {
                 .longitudeDirection(this.longitudeDirection)
                 .latitude(this.latitude)
                 .longitude(this.longitude)
+                .registrantName(this.registerName)
                 .build();
     }
 }
