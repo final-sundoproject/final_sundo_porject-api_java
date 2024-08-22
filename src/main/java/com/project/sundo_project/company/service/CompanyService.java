@@ -78,4 +78,35 @@ public class CompanyService implements UserDetailsService {
                 new ArrayList<>() // 사용자의 권한 목록
         );
     }
+
+
+
+    // 이메일, 회사명, 주소, 사업자등록번호로 회사 정보 조회
+    public Optional<Company> findCompanyByDetails(String companyEmail, String companyName, String companyAddress, String businessNumber) {
+        return companyRepository.findByCompanyEmailAndCompanyNameAndCompanyAddressAndBusinessNumber(
+                companyEmail, companyName, companyAddress, businessNumber);
+    }
+
+    public Optional<Company> findByEmail(String companyEmail) {
+        return companyRepository.findByCompanyEmail(companyEmail);
+    }
+
+//    public void updatePassword(Company company, String newPassword) {
+//        String encodedPassword = passwordEncoder.encode(newPassword);
+//        company.setPassword(encodedPassword);
+//        companyRepository.save(company);
+//    }
+
+    public boolean updatePassword(Optional<Company> companyOptional, String newPassword) {
+        if (companyOptional.isPresent()) {
+            Company company = companyOptional.get();
+            String encodedPassword = passwordEncoder.encode(newPassword);
+            company.setPassword(encodedPassword);
+            companyRepository.save(company);
+            return true; // 비밀번호 변경 성공
+        } else {
+            return false; // 회사가 존재하지 않음
+        }
+    }
+
 }
