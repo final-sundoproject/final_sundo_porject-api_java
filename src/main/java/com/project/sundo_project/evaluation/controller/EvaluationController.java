@@ -35,9 +35,10 @@ public class EvaluationController {
             @RequestParam("noiseLevel") int noiseLevel,
             @RequestParam("scenery") int scenery,
             @RequestParam("waterDepth") int waterDepth,
+            @RequestParam("companyCode") long companyCode,
             @RequestParam("locationId") String locationId) throws IOException {
 
-        EvaluationSaveDto dto = new EvaluationSaveDto(title, registrantName, windVolume, noiseLevel, scenery, waterDepth);
+        EvaluationSaveDto dto = new EvaluationSaveDto(title, registrantName, windVolume, noiseLevel, scenery, waterDepth, companyCode);
 
         log.info("uploadFile: {}", uploadFile);
         log.info("dto: {}", dto);
@@ -78,9 +79,9 @@ public class EvaluationController {
         return ResponseEntity.ok().body(foundOne);
     }
 
-    @GetMapping("/foundAll")
-    public ResponseEntity<?> findAll() {
-        List<EvaluationFindAllDto> findAllList = evaluationService.evaluationFindAll();
+    @GetMapping("/foundAll/{companyCode}")
+    public ResponseEntity<?> findAll(@PathVariable long companyCode) {
+        List<EvaluationFindAllDto> findAllList = evaluationService.evaluationFindAll(companyCode);
         log.info("findAll : {} ", findAllList);
 
         return ResponseEntity.ok().body(findAllList);

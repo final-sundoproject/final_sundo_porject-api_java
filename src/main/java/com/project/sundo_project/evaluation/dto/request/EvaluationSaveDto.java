@@ -19,6 +19,7 @@ public class EvaluationSaveDto {
     private int noiseLevel;
     private int scenery;
     private int waterDepth;
+    private long companyCode;
 
 
     public Evaluation toEntity() {
@@ -29,6 +30,7 @@ public class EvaluationSaveDto {
                 .noiseLevel(this.noiseLevel)
                 .scenery(this.scenery)
                 .waterDepth(this.waterDepth)
+                .companyCode(this.companyCode)
                 .build();
     }
 }

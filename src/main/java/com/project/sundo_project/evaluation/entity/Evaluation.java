@@ -58,6 +58,9 @@ public class Evaluation {
     @Column(name = "AverageRating")
     private int averageRating;
 
+    @Column(name = "CompanyCode")
+    private long companyCode;
+
     public void modifyEvaluation(EvaluationSaveDto dto) {
         this.title = dto.getTitle();
         this.priRegistrationDate = LocalDateTime.now();
@@ -67,5 +70,6 @@ public class Evaluation {
         this.waterDepth = dto.getWaterDepth();
         this.averageRating = (dto.getWindVolume() + dto.getNoiseLevel()
                 + dto.getScenery() + dto.getWaterDepth()) / 4;
+        this.companyCode = dto.getCompanyCode();
     }
 }

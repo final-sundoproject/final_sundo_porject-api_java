@@ -9,7 +9,7 @@ public class CrossOriginConfig implements WebMvcConfigurer {
     private String[] urls = {
             "http://localhost:8000",
             "http://localhost:8080",
-            "http://192.168.35.41:8000",
+            "http://172.30.1.23:8000",
             "http://172.30.1.81:8000"
     };
 

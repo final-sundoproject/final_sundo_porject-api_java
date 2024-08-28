@@ -58,8 +58,8 @@ public class EvaluationService {
 
     }
 
-    public List<EvaluationFindAllDto> evaluationFindAll() {
-        List<Evaluation> foundAll = evaluationRepository.findAll();
+    public List<EvaluationFindAllDto> evaluationFindAll(long companyCode) {
+        List<Evaluation> foundAll = evaluationRepository.findAllByCompanyCode(companyCode);
         log.info("service repo foundAll : {}", foundAll);
 
         return  foundAll.stream().map(
